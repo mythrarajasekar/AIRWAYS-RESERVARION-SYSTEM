@@ -1,0 +1,406 @@
+ user.java
+package com.airline;
+
+public class User {
+    private int userId;
+    private String username;
+    private String password;
+    private String role;
+
+    public User(int userId, String username, String password, String role) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", username=" + username + ", role=" + role + "]";
+    }
+}
+
+
+fligth.java
+ package com.airline;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+public class Flight {
+    private int flightId;
+    private String flightNumber;
+    private String departureCity;
+    private String arrivalCity;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
+    private BigDecimal price;
+
+    public Flight(int flightId, String flightNumber, String departureCity, String arrivalCity, LocalDateTime departureTime, LocalDateTime arrivalTime, BigDecimal price) {
+        this.flightId = flightId;
+        this.flightNumber = flightNumber;
+        this.departureCity = departureCity;
+        this.arrivalCity = arrivalCity;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.price = price;
+    }
+
+    public int getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getDepartureCity() {
+        return departureCity;
+    }
+
+    public void setDepartureCity(String departureCity) {
+        this.departureCity = departureCity;
+    }
+
+    public String getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity = arrivalCity;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDateTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalDateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight [flightId=" + flightId + ", flightNumber=" + flightNumber + ", departureCity=" + departureCity + ", arrivalCity=" + arrivalCity
+                + ", departureTime=" + departureTime + ", arrivalTime=" + arrivalTime + ", price=" + price + "]";
+    }
+}
+
+
+booking.java
+package com.airline;
+
+import java.time.LocalDateTime;
+
+public class Booking {
+    private int bookingId;
+    private int userId;
+    private int flightId;
+    private LocalDateTime bookingDate;
+    private String status;
+
+    public Booking(int bookingId, int userId, int flightId, LocalDateTime bookingDate, String status) {
+        this.bookingId = bookingId;
+        this.userId = userId;
+        this.flightId = flightId;
+        this.bookingDate = bookingDate;
+        this.status = status;
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(int flightId) {
+        this.flightId = flightId;
+    }
+
+    public LocalDateTime getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(LocalDateTime bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking [bookingId=" + bookingId + ", userId=" + userId + ", flightId=" + flightId + ", bookingDate=" + bookingDate + ", status=" + status + "]";
+    }
+}
+
+
+main.java
+package com.airline;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    static List<User> users = new ArrayList<>();
+    static List<Flight> flights = new ArrayList<>();
+    static List<Booking> bookings = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Sample data
+        users.add(new User(1, "admin", "password", "admin"));
+        flights.add(new Flight(1, "FL123", "New York", "Los Angeles", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusHours(5), new BigDecimal("300.00")));
+
+        while (true) {
+            System.out.println("Welcome to the Airline Reservation System");
+            System.out.println("1. Login");
+            System.out.println("2. Register");
+            System.out.println("3. Exit");
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            if (choice == 1) {
+                System.out.print("Username: ");
+                String username = scanner.nextLine();
+                System.out.print("Password: ");
+                String password = scanner.nextLine();
+
+                User user = login(username, password);
+                if (user != null) {
+                    if (user.getRole().equals("admin")) {
+                        adminMenu(scanner);
+                    } else {
+                        customerMenu(scanner, user);
+                    }
+                } else {
+                    System.out.println("Invalid credentials. Try again.");
+                }
+            } else if (choice == 2) {
+                System.out.print("Username: ");
+                String username = scanner.nextLine();
+                System.out.print("Password: ");
+                String password = scanner.nextLine();
+                register(username, password);
+            } else if (choice == 3) {
+                break;
+            }
+        }
+        scanner.close();
+    }
+
+    private static User login(String username, String password) {
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private static void register(String username, String password) {
+        int newUserId = users.size() + 1;
+        User newUser = new User(newUserId, username, password, "customer");
+        users.add(newUser);
+        System.out.println("Registration successful. You can now log in.");
+    }
+
+    private static void adminMenu(Scanner scanner) {
+        while (true) {
+            System.out.println("Admin Menu:");
+            System.out.println("1. Add Flight");
+            System.out.println("2. View Flights");
+            System.out.println("3. View Bookings");
+            System.out.println("4. Logout");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            if (choice == 1) {
+                addFlight(scanner);
+            } else if (choice == 2) {
+                viewFlights();
+            } else if (choice == 3) {
+                viewBookings();
+            } else if (choice == 4) {
+                break;
+            }
+        }
+    }
+
+    private static void addFlight(Scanner scanner) {
+        System.out.print("Flight Number: ");
+        String flightNumber = scanner.nextLine();
+        System.out.print("Departure City: ");
+        String departureCity = scanner.nextLine();
+        System.out.print("Arrival City: ");
+        String arrivalCity = scanner.nextLine();
+        System.out.print("Departure Time (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime departureTime = LocalDateTime.parse(scanner.nextLine());
+        System.out.print("Arrival Time (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime arrivalTime = LocalDateTime.parse(scanner.nextLine());
+        System.out.print("Price: ");
+        BigDecimal price = new BigDecimal(scanner.nextLine());
+
+        int newFlightId = flights.size() + 1;
+        Flight newFlight = new Flight(newFlightId, flightNumber, departureCity, arrivalCity, departureTime, arrivalTime, price);
+        flights.add(newFlight);
+        System.out.println("Flight added successfully.");
+    }
+
+    private static void viewFlights() {
+        System.out.println("Available Flights:");
+        for (Flight flight : flights) {
+            System.out.println(flight);
+        }
+    }
+
+    private static void viewBookings() {
+        System.out.println("All Bookings:");
+        for (Booking booking : bookings) {
+            System.out.println(booking);
+        }
+    }
+
+    private static void customerMenu(Scanner scanner, User user) {
+        while (true) {
+            System.out.println("Customer Menu:");
+            System.out.println("1. View Flights");
+            System.out.println("2. Book Flight");
+            System.out.println("3. View My Bookings");
+            System.out.println("4. Cancel Booking");
+            System.out.println("5. Logout");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            if (choice == 1) {
+                viewFlights();
+            } else if (choice == 2) {
+                bookFlight(scanner, user);
+            } else if (choice == 3) {
+                viewMyBookings(user);
+            } else if (choice == 4) {
+                cancelBooking(scanner, user);
+            } else if (choice == 5) {
+                break;
+            }
+        }
+    }
+
+    private static void bookFlight(Scanner scanner, User user) {
+        viewFlights();
+        System.out.print("Enter Flight ID to book: ");
+        int flightId = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        LocalDateTime bookingDate = LocalDateTime.now();
+        int newBookingId = bookings.size() + 1;
+        Booking newBooking = new Booking(newBookingId, user.getUserId(), flightId, bookingDate, "booked");
+        bookings.add(newBooking);
+        System.out.println("Flight booked successfully.");
+    }
+
+    private static void viewMyBookings(User user) {
+        System.out.println("Your Bookings:");
+        for (Booking booking : bookings) {
+            if (booking.getUserId() == user.getUserId()) {
+                System.out.println(booking);
+            }
+        }
+    }
+
+    private static void cancelBooking(Scanner scanner, User user) {
+        viewMyBookings(user);
+        System.out.print("Enter Booking ID to cancel: ");
+        int bookingId = scanner.nextInt();
+        scanner.nextLine();  // Consume newline
+
+        for (Booking booking : bookings) {
+            if (booking.getBookingId() == bookingId && booking.getUserId() == user.getUserId()) {
+                booking.setStatus("cancelled");
+                System.out.println("Booking cancelled successfully.");
+                return;
+            }
+        }
+        System.out.println("Invalid Booking ID.");
+    }
+}
